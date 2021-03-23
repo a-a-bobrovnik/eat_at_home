@@ -1,16 +1,11 @@
-export interface UpdateTitleDto {
-    action: "updateTitle"
-    title: string
-}
-
-export interface UpdatePriceDto {
-    action: "updatePrice"
-    price: number
-}
-
-export interface UpdateDescriptionDto {
-    action: "updateDescription"
-    description: string
+export interface UpdateMainInfo {
+    action: "updateMainInfo"
+    data:{
+        title: string
+        description: string
+        price: number
+        photo: string
+    }
 }
 
 export interface UpdateStatusDto {

@@ -11,6 +11,20 @@ import { OpenUserJwtTokenDto } from './dto/openUserJwtTokenDto.dto';
 @Injectable()
 export class UserService extends HelperForService {
 
+    async getUserData(id:number){
+        const user = await getRepository(User).findOne({
+            relations: ['dishes'],
+            select: ['id', 'firstName', 'lastName', 'email', 'roleId', 'nickname'],
+            where: [{ id: id }]
+        })
+
+        if(user){
+            return{ err: null, data: user }
+        }else{
+            return{ err: null, data: user } 
+        }
+    }
+
     async addNewUser(RegisterUserDto: RegisterUserDto) {
         const oldUser = await getRepository(User).findOne({
             where: [{ nickname: RegisterUserDto.nickname }]
@@ -77,7 +91,7 @@ export class UserService extends HelperForService {
 
     async updateName(id: number, firstName, lastName) {
         const user = await getRepository(User).findOne({
-            select: ['id', 'firstName', 'lastName'],
+            select: ['id', 'firstName', 'lastName','roleId', 'email','nickname'],
             where: [{ id: id }]
         })
 
@@ -119,7 +133,7 @@ export class UserService extends HelperForService {
             })
             return { err: null, data: { email: newEmail ? newEmail : user.email } }
         } else {
-            return { err: 'old email incorect', data: null }
+            return { err: 'auth error', data: null }
         }
     }
 

@@ -1,5 +1,5 @@
 import { UpdateUserDto } from './../Users/dto/updateUser.dto';
-import { Body, Controller, Delete, Get, Post, Req, Res, Param, Put, HttpCode, HttpStatus, UseGuards, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Req, Res, Param, Put, HttpCode, HttpStatus, UseGuards, Request, Header } from '@nestjs/common';
 import { Response } from 'express';
 import { JwtAuthGuard } from '../Auth/jwt-auth.guard';
 import { DishesService } from './dishes.service';
@@ -27,6 +27,7 @@ export class DishesController extends MainController {
     @UseGuards(JwtAuthGuard)
     @Post('/dishes')
     async create(@Body() dto: CreateDishDto, @Request() req, @Res() res: Response) {
+        console.log(req.user.userId)
         const responseData = await this.DishesService.addNewDishes(dto, req.user.userId)
         res.send(this.validateResponseData(responseData))
     }

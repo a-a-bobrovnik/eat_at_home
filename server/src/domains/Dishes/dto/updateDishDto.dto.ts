@@ -1,3 +1,3 @@
-import { UpdateDescriptionDto, UpdatePriceDto, UpdateStatusDto, UpdateTitleDto } from "../types/dishesUpdate";
+import {  UpdateMainInfo, UpdateStatusDto,  } from "../types/dishesUpdate";
 
-export type UpdateDishDto = UpdateTitleDto | UpdateDescriptionDto | UpdateStatusDto | UpdatePriceDto
+export type UpdateDishDto =  UpdateMainInfo | UpdateStatusDto 

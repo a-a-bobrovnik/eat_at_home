@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, Post, Req, Res, Param, Put, HttpCode, Ht
 import { MainController } from 'src/MainController';
 import { Response } from 'express';
 import { JwtAuthGuard } from '../Auth/jwt-auth.guard';
-import { CreateOrderDto } from './dto/createOrder.dto';
 import { OrdersService } from './order.service';
 
 @Controller()
@@ -20,12 +19,10 @@ export class OrdersController extends MainController {
         return res.send(this.validateResponseData(responseData))
     }
 
-
-
     @UseGuards(JwtAuthGuard)
     @Post('/orders/')
-    async create(@Body() CreateOrderDto: CreateOrderDto, @Res() res: Response, @Request() req) {
-        const responseData = await this.OrdersService.addNewOrder(req.user.userId, CreateOrderDto)
+    async create(@Body() dishes: Array<number>, @Res() res: Response, @Request() req) {
+        const responseData = await this.OrdersService.addNewOrder(req.user.userId, dishes)
         res.send(this.validateResponseData(responseData))
     }
 }

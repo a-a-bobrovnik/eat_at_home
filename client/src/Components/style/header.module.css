@@ -1,0 +1,20 @@
+.logo img{
+    max-width: 100px;
+}
+.headerWrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(165, 42, 42, 0.87);
+    padding: 20px 30px;
+}
+
+.btnsWrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btnsWrap button{
+    margin-right: 10px;
+}

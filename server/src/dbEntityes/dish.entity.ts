@@ -17,6 +17,9 @@ export class Dish {
     price: number;
 
     @Column()
+    photo: string;
+
+    @Column()
     description: string;
 
     @Column({name:'status_active'})

@@ -1,4 +1,3 @@
-import { CreateOrderDto } from './dto/createOrder.dto';
 import { DishOrder } from './../../dbEntityes/dish-order.entity';
 import { Order } from './../../dbEntityes/order.entity';
 import { Injectable } from '@nestjs/common';
@@ -24,14 +23,14 @@ export class OrdersService {
         return { err: null, data: userOrders }
     }
 
-    async addNewOrder(userId: number, dto: CreateOrderDto) {
+    async addNewOrder(userId: number, dishes: Array<number>) {
         const newOrderEntity = await this.getOrderRepository().insert({
             customerId: userId
         })
 
         const newOrderId = newOrderEntity.identifiers[0].id
 
-        for (const dishId of dto.dishes) {
+        for (const dishId of dishes) {
             await this.getDishOrderRepository().insert({
                 orderId: newOrderId,
                 dishId: dishId
@@ -42,10 +41,6 @@ export class OrdersService {
             relations: ['dishes'],
             where: [{ id: newOrderId }]
         })
-
-        console.log(newOrderId)
-        console.log(newOrder)
-
         return { err: null, data: newOrder }
     }
 }

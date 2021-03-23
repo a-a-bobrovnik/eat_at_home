@@ -6,6 +6,7 @@ export class CreateDishDto {
 
     readonly description: string;
 
-    readonly photos: Array<string>;
+    //readonly photos: Array<string>;
  
+    readonly photo: string;
   }
